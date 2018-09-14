@@ -410,6 +410,7 @@ tr.exportTo('tr.ui.b', function() {
 
       if (e.keyCode === ' '.charCodeAt(0)) {
         this.spacePressed_ = true;
+        e.preventDefault();
       }
       this.updateAlternativeModeState_(e);
     },
