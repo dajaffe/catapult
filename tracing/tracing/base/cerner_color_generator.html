@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<link rel="import" href="/tracing/base/sinebow_color_generator.html">
+<script>
+  'use strict';
+  tr.exportTo('tr.b', function () {
+
+    function CernerColorGenerator() {
+      this.keyToColor = {
+        SERVER_REQUEST: 'rgb(0,255,255,1)'
+      };
+    }
+
+    CernerColorGenerator.prototype = {
+      colorForTraceType(traceType) {
+        if (!this.keyToColor[traceType]) {
+          const sinebowColorGenerator = new tr.b.SinebowColorGenerator(1.0, 1.5);
+          for (let i = 0; i < numGeneralPurposeColorIds; i++) {
+            this.keyToColor[traceType] = sinebowColorGenerator.nextColor();
+          }
+        }
+
+        return this.keyToColor[traceType];
+      }
+    };
+
+    return {
+      CernerColorGenerator,
+    };
+  });
+</script>
